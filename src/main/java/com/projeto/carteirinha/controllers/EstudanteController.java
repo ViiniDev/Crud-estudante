@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 @AllArgsConstructor
 @Controller
-@RequestMapping("/estudantes")
+@RequestMapping("/carteirinhas")
 
 public class EstudanteController {
     private EstudanteService estudanteService;
 
     @PostMapping
     @ResponseBody
-    List<Estudante> create(Estudante estudante){
+    List<Estudante> create(@RequestBody Estudante estudante){
         return estudanteService.create(estudante);
 
     }
@@ -28,13 +28,14 @@ public class EstudanteController {
     }
     @PutMapping
     @ResponseBody
-    List<Estudante> update(Estudante estudante){
+    List<Estudante> update(@RequestBody  Estudante estudante){
 
         return estudanteService.update(estudante);
     }
     @DeleteMapping("{id}")
     List<Estudante> delete(@PathVariable("id") Long id){
 
-        return estudanteService.delete(id);
+         estudanteService.delete(id);
+         return estudanteService.list();
     }
 }
