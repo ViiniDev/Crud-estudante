@@ -3,6 +3,7 @@ package com.projeto.carteirinha.service;
 import com.projeto.carteirinha.entity.Estudante;
 import com.projeto.carteirinha.repository.EstudanteRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
