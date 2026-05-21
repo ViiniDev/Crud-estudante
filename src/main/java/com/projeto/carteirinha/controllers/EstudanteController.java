@@ -6,10 +6,8 @@ import com.projeto.carteirinha.repository.EstudanteRequestDTO;
 import com.projeto.carteirinha.repository.EstudanteResponseDTO;
 import com.projeto.carteirinha.service.EstudanteService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +16,7 @@ import java.util.Optional;
 
 @AllArgsConstructor
 
-@Controller
+@RestController
 @RequestMapping("/carteirinhas")
 
 public class EstudanteController {
@@ -42,7 +40,6 @@ public class EstudanteController {
 
     }
     @GetMapping
-    @ResponseBody
     List<EstudanteResponseDTO> getAll(){
 
         List<EstudanteResponseDTO> estudanteList = estudanteRepository.findAll().stream().map(EstudanteResponseDTO::new).toList();
@@ -57,7 +54,8 @@ public class EstudanteController {
             estudante.setEmail(dto.email());
             estudante.setMatricula(dto.matricula());
             estudante.setEndereco(dto.endereco());
-            return ResponseEntity.ok(estudante);
+            Estudante estudanteAtualizado = estudanteRepository.save(estudante);
+            return ResponseEntity.ok(estudanteAtualizado);
         } else {
             return ResponseEntity.notFound().build();
         }
